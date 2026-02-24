@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Triage Assistant</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --orange: #ff6b00;
+            --orange-light: #ff8c33;
+            --orange-dim: rgba(255, 107, 0, 0.15);
+            --dark: #0e0e0e;
+            --dark-2: #161616;
+            --dark-3: #1e1e1e;
+            --dark-4: #262626;
+            --text: #e8e8e8;
+            --text-muted: #888;
+            --border: rgba(255, 107, 0, 0.2);
+            --font-display: 'Bebas Neue', sans-serif;
+            --font-body: 'Outfit', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--dark) 0%, var(--dark-2) 50%, var(--dark-3) 100%);
+            color: var(--text);
+            font-family: var(--font-body);
+            font-weight: 400;
+            line-height: 1.7;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        header {
+            text-align: center;
+            padding: 4rem 0 2rem;
+            background: linear-gradient(135deg, var(--orange-dim), transparent);
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 8vw, 6rem);
+            background: linear-gradient(135deg, var(--orange), var(--orange-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 0.1em;
+            text-shadow: 0 0 30px var(--orange-dim);
+            margin-bottom: 1rem;
+        }
+
+        .project-tag {
+            font-family: var(--font-display);
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: var(--orange);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-weight: 400;
+        }
+
+        main {
+            padding: 4rem 0;
+        }
+
+        .content {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            padding: 4rem;
+            margin-bottom: 4rem;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+        }
+
+        .content p {
+            font-size: 1.1rem;
+            max-width: 900px;
+            margin: 0 auto 1.5rem;
+            text-align: justify;
+        }
+
+        .content p:last-child {
+            text-align: center;
+            font-style: italic;
+            color: var(--text-muted);
+            margin-top: 2rem;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2.5rem 2rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--orange), var(--orange-light));
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(255, 107, 0, 0.25);
+            border-color: var(--orange);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--orange), var(--orange-light));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .feature-title {
+            font-family: var(--font-display);
+            font-size: 1.6rem;
+            color: var(--orange);
+            margin-bottom: 1rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 4rem 2rem 2rem;
+            background: var(--dark-4);
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-text {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1.5rem;
+            }
+            
+            header {
+                padding: 3rem 0 1.5rem;
+            }
+            
+            .content {
+                padding: 2.5rem 2rem;
+                margin-bottom: 2rem;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        /* Scroll animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .content, .feature-card {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .feature-card:nth-child(1) { animation-delay: 0.1s; }
+        .feature-card:nth-child(2) { animation-delay: 0.2s; }
+        .feature-card:nth-child(3) { animation-delay: 0.3s; }
+        .feature-card:nth-child(4) { animation-delay: 0.4s; }
+        .feature-card:nth-child(5) { animation-delay: 0.5s; }
+        .feature-card:nth-child(6) { animation-delay: 0.6s; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>SMART TRIAGE ASSISTANT</h1>
+            <div class="project-tag">IN EMERGENCY WARDS</div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <section class="content">
+                <p>Emergency wards are high-pressure environments where rapid and accurate triage is essential to save lives. Traditional triage processes, often based on manual paperwork and subjective clinical judgment, are prone to delays, inconsistencies, and fragmented decision-making. With patient data scattered across labs, radiology units, and monitoring devices, doctors may face difficulty in obtaining a holistic and timely view of a patient's condition.</p>
+                <p>The proposed project, Smart Triage Assistant in Emergency Wards, aims to overcome these barriers by introducing a web-based bedside system that automatically processes and analyzes multi-source patient data to generate real-time, reliable triage recommendations. Test results, medical history, and continuous monitoring updates are immediately stored in a centralized hospital database, eliminating paperwork and enabling seamless, effective, data-driven decision-making.</p>
+                <p>At the core of this intelligent system lies the powerful Random Forest machine learning algorithm. This model is exceptionally well-suited for handling heterogeneous medical data and complex relationships between variables. Random Forest provides stability, robustness, and interpretability by combining multiple decision trees, making it highly reliable for medical classification tasks.</p>
+                <p>The model allows the system to classify patients into categories such as Critical, Moderate, or Stable, with probability-based scoring to support confident and safe clinical decisions.</p>
+                <p>The triage outcomes are displayed on interactive, color-coded dashboards accessible at the patient's bedside. This visualization presents doctors with a clear overview of patient conditions across the ward, highlighting critical cases that need immediate intervention. By providing a reliable, automated assessment tool, the system supports clinicians in prioritizing patients fairly and quickly during crowded emergency scenarios.</p>
+            </section>
+
+            <section class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">AI</div>
+                    <div class="feature-title">Intelligent Triage Scoring</div>
+                    <p>Random Forest algorithm using vital signs, lab results, and clinical history to prioritize patients who must be seen first.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👥</div>
+                    <div class="feature-title">Multi-Role Access System</div>
+                    <p>Distinct portals for administrators, physicians, patients, and medical staff with role-based access control.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📡</div>
+                    <div class="feature-title">Real-Time Monitoring</div>
+                    <p>WebSocket technology provides live patient condition updates across all connected devices.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🚨</div>
+                    <div class="feature-title">Emergency Alert System</div>
+                    <p>Twilio-powered automated email and SMS alerts to available physicians for critical cases.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📋</div>
+                    <div class="feature-title">Patient Data Management</div>
+                    <p>Centralized records including all lab tests, medical history, and treatment progress.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <div class="feature-title">Visual Analytics Dashboard</div>
+                    <p>Interactive charts and trends helping doctors make better treatment decisions.</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p class="footer-text">&copy; 2026 Smart Triage Assistant. Powered by Random Forest & Real-time Web Technology.</p>
+        </div>
+    </footer>
+</body>
+</html>
