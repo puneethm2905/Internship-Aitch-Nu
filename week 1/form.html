@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Registration Form</title>
+</head>
+<body>
+    <h1>Registration Form</h1>
+    <form action="">
+        <h2>Personal Information</h2>
+        <p>
+            <label for="firstname">Name:</label>
+            <input type="text" id="firstname" name="firstname" placeholder="Enter your first name" required>
+            <input type="text" id="lastname" name="lastname" placeholder="Enter your last name">
+        </p><br>
+        <label>Password</label>
+        <input type="password" id="pass" name="password" required>
+
+
+        <p>
+            <label for="bio">Bio:</label><br>
+            <textarea id="bio" name="bio" rows="4" cols="50" placeholder="Tell us about yourself..."></textarea>
+        </p>
+        
+        <h2>Gender</h2>
+        <p>
+            <input type="radio" id="male" name="gender" value="male">
+            <label for="male">Male</label>
+            
+            <input type="radio" id="female" name="gender" value="female">
+            <label for="female">Female</label>
+            
+            <input type="radio" id="other" name="gender" value="other">
+            <label for="other">Other</label>
+        </p>
+        
+        <h2>Hobbies </h2>
+        <p>
+            <input type="checkbox" id="coding" name="hobbies" value="coding">
+            <label for="coding">Coding</label>
+            
+            <input type="checkbox" id="reading" name="hobbies" value="reading">
+            <label for="reading">Reading</label>
+            
+            <input type="checkbox" id="sports" name="hobbies" value="sports">
+            <label for="sports">Sports</label>
+        </p>
+        
+        <p>
+            <label for="country">Select Country:</label><br>
+            <select id="country" name="country">
+                <option value="">--Choose one--</option>
+                <option value="india">India</option>
+                <option value="usa">USA</option>
+                <option value="uk">UK</option>
+                <option value="canada">Canada</option>
+            </select>
+        </p>
+        <p>
+            <button type="submit">Submit Form</button>
+        </p>
+        <p>
+            <button type="reset">Reset Form</button>
+        </p>
+    </form>
+</body>
+</html>
