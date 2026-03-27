@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Arithmetic Operators</title>
+</head>
+<body>
+    <h2>Enter numbers:</h2>
+    Num1: <input type="number" id="n1" value=""><br><br>
+    Num2: <input type="number" id="n2" value=""><br><br>
+    
+    <button onclick="add()">Add</button>
+    <button onclick="multiply()">Mul</button>
+    <button onclick="subtract()"> Sub</button>
+    <button onclick="divide()">Div</button>
+    <button onclick="modules()">Mod</button>
+    
+    <p id="result"></p>
+    <script>
+        function add() {
+            let a = Number(document.getElementById("n1").value);
+            let b = Number(document.getElementById("n2").value);
+            let r = a + b;
+            document.getElementById("result").innerHTML = "Result: " + r;
+            console.log("result:"+r);
+        }
+        
+        function multiply() {
+            let a = Number(document.getElementById("n1").value);
+            let b = Number(document.getElementById("n2").value);
+            let r = a * b;
+            document.getElementById("result").innerHTML = "Result: " + r;
+            console.log("result:"+ r);
+        }
+        
+        function subtract() {
+            let a = Number(document.getElementById("n1").value);
+            let b = Number(document.getElementById("n2").value);
+            let r = a - b;
+            document.getElementById("result").innerHTML = "Result: " + r;
+            console.log("result:"+r);
+        }
+        
+        function divide() {
+            let a = Number(document.getElementById("n1").value);
+            let b = Number(document.getElementById("n2").value);
+            let r = a / b;
+            document.getElementById("result").innerHTML = "Result: " + r;
+            console.log("result:"+r);
+        }
+        function modules() {
+            let a = Number(document.getElementById("n1").value);
+            let b = Number(document.getElementById("n2").value);
+            let r = a % b;
+            document.getElementById("result").innerHTML = "Result: " + r;
+            console.log("result:"+r);
+        }
+    </script>
+</body>
+</html>

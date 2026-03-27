@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart Student Utility | by Puneeth M</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-brand">Math & <span>Logic</span></div>
+  <ul class="nav-links">
+    <li><a href="#grade">Grade Calc</a></li>
+    <li><a href="#palindrome">Palindrome</a></li>
+    <li><a href="#analyzer">Number</a></li>
+    <li><a href="#login">Login</a></li>
+  </ul>
+  <div class="nav-right">
+    <span class="toggle-label" id="modeLabel">Dark</span>
+    <button class="toggle-btn" id="themeToggle">
+      <span class="knob"></span>
+    </button>
+  </div>
+</nav>
+
+<section class="hero">
+  <h1>Math & Logical<br><span>Hub</span></h1>
+  <p>A collection of useful tools — grade calculator, palindrome checker, number analyzer, and login validator</p>
+</section>
+
+<main class="main-content">
+  <div id="grade" class="section-divider"><span>01 — Grade Calculator</span></div>
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">📊</div>
+      <div class="card-title-group">
+        <h2>Student Grade Calculator</h2>
+        <p>Enter name and 5 subject marks to compute grade</p>
+      </div>
+    </div>
+    <div class="card-body">
+
+      <div class="form-group">
+        <label for="studentName">Student Name</label>
+        <input type="text" id="studentName" placeholder="e.g. Puneeth M" />
+      </div>
+
+      <div class="marks-grid">
+        <div class="mark-input">
+          <label for="m1">Math</label>
+          <input type="number" id="m1" placeholder="0-100" />
+        </div>
+        <div class="mark-input">
+          <label for="m2">Science</label>
+          <input type="number" id="m2" placeholder="0-100" />
+        </div>
+        <div class="mark-input">
+          <label for="m3">English</label>
+          <input type="number" id="m3" placeholder="0-100" />
+        </div>
+        <div class="mark-input">
+          <label for="m4">History</label>
+          <input type="number" id="m4" placeholder="0-100" />
+        </div>
+        <div class="mark-input">
+          <label for="m5">Computer</label>
+          <input type="number" id="m5" placeholder="0-100" />
+        </div>
+      </div>
+
+      <div class="btn-group">
+        <button class="btn btn-primary" onclick="calculateGrade()">Calculate Grade</button>
+        <button class="btn btn-secondary" onclick="resetGrade()">Reset</button>
+      </div>
+
+      <div class="result-box" id="gradeResult">
+        <div class="result-row">
+          <span class="result-label">Student</span>
+          <span class="result-value" id="resName">—</span>
+        </div>
+        <div class="result-row">
+          <span class="result-label">Total</span>
+          <span class="result-value" id="resTotal">—</span>
+        </div>
+        <div class="result-row">
+          <span class="result-label">Average</span>
+          <span class="result-value" id="resAvg">—</span>
+        </div>
+        <div class="result-row">
+          <span class="result-label">Grade</span>
+          <span class="result-value" id="resGrade">—</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div id="palindrome" class="section-divider"><span>02 — Palindrome Checker</span></div>
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">🔤</div>
+      <div class="card-title-group">
+        <h2>Palindrome Checker</h2>
+        <p>Check if a word reads the same forwards and backwards</p>
+      </div>
+    </div>
+    <div class="card-body">
+
+      <div class="form-group">
+        <label for="palInput">Enter Word</label>
+        <input type="text" id="palInput" placeholder="e.g. racecar, level" oninput="countChars()" />
+        <div class="char-counter"><span id="charCount">0</span> characters</div>
+      </div>
+
+      <div class="btn-group">
+        <button class="btn btn-primary" onclick="checkPalindrome()">Check Palindrome</button>
+        <button class="btn btn-secondary" onclick="resetPalindrome()">Reset</button>
+      </div>
+
+      <div class="pal-result" id="palResult">
+        <span class="pal-icon" id="palIcon"></span>
+        <div>
+          <div id="palVerdict"></div>
+          <div class="pal-reversed" id="palReversed"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div id="analyzer" class="section-divider"><span>03 — Number Analyzer</span></div>
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">🔢</div>
+      <div class="card-title-group">
+        <h2>Number Analyzer</h2>
+        <p>Check even/odd, positive/negative, and print 1 to N</p>
+      </div>
+    </div>
+    <div class="card-body">
+
+      <div class="form-group">
+        <label for="numInput">Enter a Number</label>
+        <input type="number" id="numInput" placeholder="e.g. 42" />
+      </div>
+
+      <div class="btn-group">
+        <button class="btn btn-primary" onclick="analyzeNumber()">Analyze</button>
+        <button class="btn btn-secondary" id="loopBtn" onclick="toggleLoop()" style="display:none">Show 1 to N</button>
+        <button class="btn btn-secondary" onclick="resetAnalyzer()">Reset</button>
+      </div>
+
+      <div class="chips-row" id="chipsRow"></div>
+      <div class="loop-output" id="loopOutput"></div>
+
+    </div>
+  </div>
+
+  <div id="login" class="section-divider"><span>04 — Login Validation</span></div>
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">🔐</div>
+      <div class="card-title-group">
+        <h2>Simple Login Validation</h2>
+        <p>Username: <code style="color:#9E9E9E;font-family:monospace">Puneeth</code> &nbsp;/&nbsp; Password: <code style="color:#9E9E9E;font-family:monospace">Puneeth@M29</code></p>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="login-wrap">
+
+        <div class="form-group">
+          <label for="loginUser">Username</label>
+          <input type="text" id="loginUser" placeholder="Enter username" />
+        </div>
+        <div class="form-group">
+          <label for="loginPass">Password</label>
+          <input type="password" id="loginPass" placeholder="Enter password" />
+        </div>
+
+        <div class="btn-group">
+          <button class="btn btn-primary" onclick="validateLogin()">Login</button>
+          <button class="btn btn-danger" onclick="resetLogin()">Clear</button>
+        </div>
+
+        <div class="login-msg" id="loginMsg"></div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <span class="logo">PUNEETH M</span>
+        <p>Full Stack Developer &amp; ML Enthusiast</p>
+        <p>Bengaluru, Karnataka, India</p>
+      </div>
+      <div class="footer-nav">
+        <h5>Quick Links</h5>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#grade">Grade Calculator</a></li>
+          <li><a href="#palindrome">Palindrome Checker</a></li>
+          <li><a href="#analyzer">Number Analyzer</a></li>
+          <li><a href="#login">Login Validation</a></li>
+        </ul>
+      </div>
+      <div class="footer-contact">
+        <h5>Contact</h5>
+        <p><a href="mailto:puneethmgowda2905@gmail.com">puneethmgowda2905@gmail.com</a></p>
+        <p><a href="tel:+919019827847">+91 9019827847</a></p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Puneeth M. All Rights Reserved.</p>
+      <div class="footer-socials">
+        <a href="https://facebook.com" target="_blank">f</a>
+        <a href="https://www.linkedin.com/in/puneethm05" target="_blank">in</a>
+        <a href="https://twitter.com" target="_blank">t</a>
+        <a href="https://github.com/puneethm2905" target="_blank">gh</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  let isLight = false;
+
+  document.getElementById('themeToggle').onclick = function () {
+    if (isLight == false) {
+      document.body.className = 'light';
+      document.getElementById('modeLabel').innerHTML = 'Light';
+      isLight = true;
+    } else {
+      document.body.className = '';
+      document.getElementById('modeLabel').innerHTML = 'Dark';
+      isLight = false;
+    }
+  };
+
+  function showBox(id) {
+    document.getElementById(id).className =
+      document.getElementById(id).className + ' show';
+  }
+
+  function hideBox(id) {
+    const el = document.getElementById(id);
+    const cls = el.className;
+    let newCls = '';
+    const words = cls.split(' ');
+    for (let i = 0; i < words.length; i++) {
+      if (words[i] != 'show') {
+        newCls = newCls + words[i] + ' ';
+      }
+    }
+    el.className = newCls;
+  }
+
+  function calculateGrade() {
+    let name = document.getElementById('studentName').value;
+    let trimName = '';
+    let started = false;
+    for (let i = 0; i < name.length; i++) {
+      if (name[i] != ' ') started = true;
+      if (started) trimName = trimName + name[i];
+    }
+    let endName = '';
+    let trailingStarted = false;
+    for (let i = trimName.length - 1; i >= 0; i--) {
+      if (trimName[i] != ' ') trailingStarted = true;
+      if (trailingStarted) endName = trimName[i] + endName;
+    }
+    name = endName;
+
+    if (name == '') {
+      alert('Please enter the student name.');
+      return;
+    }
+    const m1 = document.getElementById('m1').value;
+    const m2 = document.getElementById('m2').value;
+    const m3 = document.getElementById('m3').value;
+    const m4 = document.getElementById('m4').value;
+    const m5 = document.getElementById('m5').value;
+
+    const n1 = m1 * 1;
+    const n2 = m2 * 1;
+    const n3 = m3 * 1;
+    const n4 = m4 * 1;
+    const n5 = m5 * 1;
+
+    if (m1 == '' || m2 == '' || m3 == '' || m4 == '' || m5 == '') {
+      alert('Please fill all 5 subject marks.');
+      return;
+    }
+
+    if (n1 < 0 || n1 > 100 || n2 < 0 || n2 > 100 ||
+        n3 < 0 || n3 > 100 || n4 < 0 || n4 > 100 || n5 < 0 || n5 > 100) {
+      alert('Marks must be between 0 and 100.');
+      return;
+    }
+
+    const total = n1 + n2 + n3 + n4 + n5;
+    const avg = total / 5;
+    let avgRounded = (avg * 100 + 0.5);
+    avgRounded = avgRounded - (avgRounded % 1);
+    avgRounded = avgRounded / 100;
+
+    let grade = '';
+    let badgeCls = '';
+
+    if (avg >= 90) {
+      grade    = 'A+';
+      badgeCls = 'badge badge-ap';
+    } else if (avg >= 75) {
+      grade    = 'A';
+      badgeCls = 'badge badge-a';
+    } else if (avg >= 60) {
+      grade    = 'B';
+      badgeCls = 'badge badge-b';
+    } else if (avg >= 50) {
+      grade    = 'C';
+      badgeCls = 'badge badge-c';
+    } else {
+      grade    = 'Fail';
+      badgeCls = 'badge badge-f';
+    }
+
+    document.getElementById('resName').innerHTML  = name;
+    document.getElementById('resTotal').innerHTML = total + ' / 500';
+    document.getElementById('resAvg').innerHTML   = avgRounded + ' %';
+    document.getElementById('resGrade').innerHTML =
+      '<span class="' + badgeCls + '">' + grade + '</span>';
+
+    hideBox('gradeResult');
+    showBox('gradeResult');
+  }
+
+  function resetGrade() {
+    document.getElementById('studentName').value = '';
+    document.getElementById('m1').value = '';
+    document.getElementById('m2').value = '';
+    document.getElementById('m3').value = '';
+    document.getElementById('m4').value = '';
+    document.getElementById('m5').value = '';
+    hideBox('gradeResult');
+  }
+
+  function countChars() {
+    const word = document.getElementById('palInput').value;
+    let count = 0;
+    for (let i = 0; i < word.length; i++) {
+      count = count + 1;
+    }
+    document.getElementById('charCount').innerHTML = count;
+  }
+
+  function toLower(ch) {
+    const code = ch.charCodeAt(0);
+    if (code >= 65 && code <= 90) {
+      return String.fromCharCode(code + 32);
+    }
+    return ch;
+  }
+
+  function checkPalindrome() {
+    const word = document.getElementById('palInput').value;
+    let trimmed = '';
+    let go = false;
+    for (let i = 0; i < word.length; i++) {
+      if (word[i] != ' ') go = true;
+      if (go) trimmed = trimmed + word[i];
+    }
+    let clean = '';
+    let goBack = false;
+    for (let i = trimmed.length - 1; i >= 0; i--) {
+      if (trimmed[i] != ' ') goBack = true;
+      if (goBack) clean = trimmed[i] + clean;
+    }
+
+    if (clean == '') {
+      alert('Please enter a word.');
+      return;
+    }
+    let rev = '';
+    for (let i = clean.length - 1; i >= 0; i--) {
+      rev = rev + clean[i];
+    }
+    let same = true;
+    if (clean.length != rev.length) {
+      same = false;
+    } else {
+      for (let i = 0; i < clean.length; i++) {
+        if (toLower(clean[i]) != toLower(rev[i])) {
+          same = false;
+        }
+      }
+    }
+
+    const resEl = document.getElementById('palResult');
+    resEl.className = 'pal-result';
+
+    if (same == true) {
+      resEl.className = 'pal-result yes show';
+      document.getElementById('palIcon').innerHTML    = '✅';
+      document.getElementById('palVerdict').innerHTML = '"' + clean + '" is a Palindrome!';
+    } else {
+      resEl.className = 'pal-result no show';
+      document.getElementById('palIcon').innerHTML    = '❌';
+      document.getElementById('palVerdict').innerHTML = '"' + clean + '" is NOT a Palindrome!';
+    }
+
+    document.getElementById('palReversed').innerHTML =
+      'Original: ' + clean + '   |   Reversed: ' + rev;
+  }
+
+  function resetPalindrome() {
+    document.getElementById('palInput').value = '';
+    document.getElementById('charCount').innerHTML = '0';
+    document.getElementById('palResult').className = 'pal-result';
+  }
+
+  let loopVisible = false;
+
+  function analyzeNumber() {
+    const input = document.getElementById('numInput').value;
+
+    if (input == '') {
+      alert('Please enter a number.');
+      return;
+    }
+
+    const num = input * 1;
+
+    let evenOddChip = '';
+    const floor = num - (num % 1);
+    if (num == floor) {
+      if (num % 2 == 0) {
+        evenOddChip = '<span class="chip chip-neutral">Even</span>';
+      } else {
+        evenOddChip = '<span class="chip chip-neutral">Odd</span>';
+      }
+    }
+
+    let signChip = '';
+    if (num > 0) {
+      signChip = '<span class="chip chip-pos">Positive</span>';
+    } else if (num < 0) {
+      signChip = '<span class="chip chip-neg">Negative</span>';
+    } else {
+      signChip = '<span class="chip chip-zero">Zero</span>';
+    }
+
+    const numChip = '<span class="chip chip-neutral"># ' + num + '</span>';
+
+    document.getElementById('chipsRow').innerHTML = signChip + evenOddChip + numChip;
+    document.getElementById('chipsRow').className = 'chips-row show';
+
+    const loopBtn = document.getElementById('loopBtn');
+    loopVisible = false;
+    hideBox('loopOutput');
+
+    if (num > 0 && num == floor && num <= 500) {
+      loopBtn.style.display = '';
+      loopBtn.innerHTML = 'Show 1 to ' + num;
+    } else {
+      loopBtn.style.display = 'none';
+    }
+  }
+
+  function toggleLoop() {
+    const num    = document.getElementById('numInput').value * 1;
+    const outEl  = document.getElementById('loopOutput');
+    const btn    = document.getElementById('loopBtn');
+
+    if (loopVisible == true) {
+      outEl.className = 'loop-output';
+      btn.innerHTML = 'Show 1 to ' + num;
+      loopVisible = false;
+    } else {
+      let list = '';
+      for (let i = 1; i <= num; i++) {
+        list = list + i;
+        if (i < num) {
+          list = list + '  .  ';
+        }
+      }
+      outEl.innerHTML = list;
+      outEl.className = 'loop-output show';
+      btn.innerHTML = 'Hide';
+      loopVisible = true;
+    }
+  }
+
+  function resetAnalyzer() {
+    document.getElementById('numInput').value    = '';
+    document.getElementById('chipsRow').className = 'chips-row';
+    document.getElementById('chipsRow').innerHTML = '';
+    document.getElementById('loopOutput').className = 'loop-output';
+    document.getElementById('loopBtn').style.display = 'none';
+    loopVisible = false;
+  }
+
+  function validateLogin() {
+    const user = document.getElementById('loginUser').value;
+    const pass = document.getElementById('loginPass').value;
+    const msg  = document.getElementById('loginMsg');
+    const correctUser = 'Puneeth';
+    const correctPass = 'Puneeth@M29';
+
+    if (user == correctUser && pass == correctPass) {
+      msg.className = 'login-msg ok show';
+      msg.innerHTML = 'Login Successful! Welcome, <strong>' + user + '</strong>.';
+    } else {
+      msg.className = 'login-msg fail show';
+      msg.innerHTML = 'Invalid Credentials. Please try again.';
+    }
+  }
+
+  function resetLogin() {
+    document.getElementById('loginUser').value = '';
+    document.getElementById('loginPass').value = '';
+    document.getElementById('loginMsg').className = 'login-msg';
+    document.getElementById('loginMsg').innerHTML = '';
+  }
+
+</script>
+</body>
+</html>
