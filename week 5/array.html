@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Array Practice - Enhanced Selection</title>
+</head>
+<body>
+    <h2>Array: <span id="showArray"></span></h2>
+
+    <h3>1. Print Array</h3>
+    <button onclick="p1()">Program 1</button>
+    <div id="out1"></div>
+    
+    <h3 class="sub-heading">2. Print Loop</h3>
+    <button onclick="p2()">Program 2</button>
+    <div id="out2"></div>
+    
+    <h3 class="sub-heading">3. Add Number</h3>
+    <button onclick="p3()" id="btn-add">Program 3</button>
+    <div id="out3"></div>
+    
+    <form id="arrayForm">
+        <h3>4. Sum Array</h3>
+        <button type="button" onclick="p4()">Program 4</button>
+        <div id="out4"></div>
+    </form>
+    
+    <h3>5. Max Number</h3>
+    <button id="maxBtn">Program 5</button>
+    <div id="out5"></div>
+
+    <h3>6. Show Images</h3>
+    <div>
+        <img id="mainImage" src="im.jpg" alt="Image 1" height="400" >
+    </div>
+    <button type="button" onclick="showImage(1)">Show Image 1</button>
+    <button type="button" onclick="showImage(2)">Show Image 2</button>
+    <button type="button" onclick="showImage(3)"> Show Image 3</button>
+    <button type="button" onclick="showImage(4)">Show Image 4</button>
+    <button type="button" onclick="showImage(5)">Show Image 5</button>
+
+    <script>
+        let arr = [10, 20, 30, 40, 50];
+        const displaySpan = document.getElementById("showArray");
+        displaySpan.innerHTML = arr;
+
+        displaySpan.onmouseover = function() {
+            this.style.color = "pink";
+            this.style.cursor = "pointer";
+        };
+        displaySpan.onmouseout = function() {
+            this.style.color = "black";
+        };
+
+        function p1() {
+            let headings = document.getElementsByTagName("h3");
+            for (let h of headings) {
+                h.style.color = "blue";
+            }
+            document.getElementById("out1").innerHTML = arr.join(" -> ");
+        }
+
+        function p2() {
+            let subHeads = document.getElementsByClassName("sub-heading");
+            subHeads[0].innerHTML = "Loop Running...";
+            
+            let x = "";
+            for (let i = 0; i < arr.length; i++) {
+                x += arr[i] + "<br>";
+            }
+            document.getElementById("out2").innerHTML = x;
+        }
+
+        function p3() {
+            let addButton = document.querySelector("#btn-add");
+            addButton.style.fontWeight = "bold";
+
+            arr.push(Math.floor(Math.random() * 100)); 
+            displaySpan.innerHTML = arr; 
+            document.getElementById("out3").innerHTML = "Added! New array: " + arr.join(", ");
+        }
+
+        function p4() {
+            let myForm = document.forms["arrayForm"];
+            
+            let s = 0;
+            for (let i = 0; i < arr.length; i++) {
+                s += arr[i];
+            }
+            document.getElementById("out4").innerHTML = "Sum calculated within form = " + s;
+        }
+
+        document.getElementById("maxBtn").onclick = function() {
+            let m = Math.max(...arr); 
+            document.getElementById("out5").innerHTML = "Max = " + m;
+        };
+
+        const images = [
+            "im.jpg",
+            "iot.jpg",
+            "iii.png",
+            "dog.png",
+            "ad.jpg"
+        ];
+
+        function showImage(n) {
+            const mainImg = document.getElementById("mainImage");
+            mainImg.src = images[n - 1];
+            mainImg.alt = "Image " + n;
+        }
+    </script>
+</body>
+</html>

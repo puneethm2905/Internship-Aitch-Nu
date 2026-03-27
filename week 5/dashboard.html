@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactive Data Dashboard</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+<nav>
+<h2 class="logo">VividPanel</h2>
+<ul><li><a href="#userGen">User Generator</a></li>
+<li><a href="#weatherSec">Weather</a></li>
+<li><a href="#todoSec">ToDo List</a></li>
+<li><a href="#searchSec">Live Search</a></li></ul>
+</nav>
+</header>
+
+<section class="hero">
+<div class="hero-content">
+<h1>VividPanel</h1>
+<p>Interactive Data Dashboard</p>
+</div>
+</section>
+
+<section class="section light" id="userGen">
+<div class="container">
+<div class="card">
+<h3>Random User Generator</h3>
+<button onclick="generateUser()">Generate User</button>
+<div id="user"></div>
+</div>
+</div>
+</section>
+
+<section class="section dark" id="weatherSec">
+<div class="container">
+<div class="card">
+<h3>Weather Search</h3>
+<input type="text" id="city" placeholder="Enter City">
+<button onclick="getWeather()">Search Weather</button>
+<div id="weather"></div>
+</div></div>
+</section>
+
+<section class="section light" id="todoSec">
+<div class="container">
+<div class="card">
+<h3>To Do List</h3>
+<input type="text" id="taskInput" placeholder="Enter task">
+<button onclick="addTask()">Add</button>
+<ul id="taskList"></ul>
+</div></div>
+</section>
+
+<section class="section dark" id="searchSec">
+<div class="container">
+<div class="card">
+<h3>Product Search</h3>
+<input type="text" id="search" placeholder="Search product" onkeyup="filterProducts()">
+<ul id="productList">
+<li>Laptop</li>
+<li>Phone</li>
+<li>Headphones</li>
+<li>Keyboard</li>
+<li>Mouse</li>
+<li>Camera</li>
+<li>Smartwatch</li>
+<li>Tablet</li>
+<li>Speaker</li>
+<li>Monitor</li></ul>
+</div></div>
+</section>
+
+<footer>
+<div class="footer-inner">
+<div class="footer-top">
+<div class="footer-brand">
+<span class="logo">VividPanel</span>
+<p>Interactive Data Dashboard for Real-Time API Data.</p>
+<p>Bengaluru, Karnataka, India</p>
+</div>
+<div class="footer-nav">
+<h5>Modules</h5>
+<ul>
+<li><a href="#user">User Generator</a></li>
+<li><a href="#weather">Weather</a></li>
+<li><a href="#todo">ToDo List</a></li>
+<li><a href="#search">Live Search</a></li>
+</ul>
+</div>
+<div class="footer-contact">
+<h5>Contact</h5>
+<p><a href="mailto:vividpanel@dashboard.in">vividpanel@dashboard.in</a></p>
+<p><a href="tel:+918987827847">+91 8987827847</a></p>
+</div>
+</div>
+
+<div class="footer-bottom">
+<p>© 2026 VividPanel. All Rights Reserved.</p>
+<div class="footer-socials">
+<a href="https://facebook.com">f</a>
+<a href="https://instagram.com">i</a>
+<a href="https://twitter.com">t</a>
+<a href="https://github.com">gh</a>
+</div>
+</div>
+</div>
+</footer>
+
+
+<script>
+
+function generateUser(){
+fetch("https://randomuser.me/api/")
+.then(function(response){
+return response.json();
+})
+.then(function(data){
+var user=data.results[0];
+document.getElementById("user").innerHTML=
+"<img src='"+user.picture.medium+"'>"+
+"<p><b>Name:</b> "+user.name.first+" "+user.name.last+"</p>"+
+"<p><b>Email:</b> "+user.email+"</p>"+
+"<p><b>Country:</b> "+user.location.country+"</p>";
+});
+}
+
+function getWeather(){
+var city=document.getElementById("city").value;
+var url="https://geocoding-api.open-meteo.com/v1/search?name="+city;
+fetch(url)
+.then(function(res){
+return res.json();
+})
+
+.then(function(data){
+var lat=data.results[0].latitude;
+var lon=data.results[0].longitude;
+var weatherURL="https://api.open-meteo.com/v1/forecast?latitude="+lat+"&longitude="+lon+"&current_weather=true";
+fetch(weatherURL)
+.then(function(res){
+return res.json();
+})
+
+.then(function(weather){
+var w=weather.current_weather;
+document.getElementById("weather").innerHTML=
+"<p><b>Temperature:</b> "+w.temperature+" °C</p>"+
+"<p><b>Wind Speed:</b> "+w.windspeed+" km/h</p>"+
+"<p><b>Weather Code:</b> "+w.weathercode+"</p>";
+});
+});
+}
+
+function addTask(){
+var input=document.getElementById("taskInput");
+var task=input.value;
+if(task=="") return;
+var li=document.createElement("li");
+li.innerHTML=task;
+
+li.onclick=function(){
+li.classList.toggle("completed");
+};
+
+var del=document.createElement("button");
+del.innerHTML="X";
+
+del.onclick=function(){
+li.remove();
+};
+
+li.appendChild(del);
+document.getElementById("taskList").appendChild(li);
+input.value="";
+}
+
+function filterProducts(){
+var input=document.getElementById("search").value.toLowerCase();
+var items=document.getElementById("productList").getElementsByTagName("li");
+
+for(var i=0;i<items.length;i++){
+var txt=items[i].innerHTML.toLowerCase();
+if(txt.indexOf(input)>-1){
+items[i].style.display="";
+}
+else{
+items[i].style.display="none";
+}}}
+
+</script>
+</body>
+</html>
